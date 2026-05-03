@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist-server",
+    "noEmit": false,
+    "sourceMap": false,
+    "declaration": false
+  },
+  "include": [
+    "server.ts",
+    "config.ts",
+    "electron/main.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": ["node_modules", "client", "dist-server"]
+}

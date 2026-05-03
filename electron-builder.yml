@@ -1,0 +1,81 @@
+appId: pro.hiveguard.bundler
+productName: Hive Bundler
+copyright: HiveGuard.pro
+
+directories:
+  output: release
+
+files:
+  # Electron entry + preload
+  - electron-main.js
+  - server-entry.js
+  - electron/preload.js
+
+  # Pre-compiled TypeScript output (built by npm run build:ts)
+  - dist-server/**/*
+
+  # Vite-built frontend
+  - client/dist/**/*
+
+  # Static data files bundled inside asar (referenced via app.getAppPath())
+  - pumpfun-IDL.json
+  - blockengine.json
+
+  # Dependencies (electron-builder auto-prunes devDependencies)
+  - node_modules/**/*
+  - "!node_modules/.cache/**"
+  - "!**/*.map"
+  - "!**/*.ts"
+  - "!**/*.ts.map"
+
+# Native addons must be outside ASAR to load correctly
+asarUnpack:
+  - "node_modules/bigint-buffer/**"
+  - "node_modules/bufferutil/**"
+  - "node_modules/utf-8-validate/**"
+  - "node_modules/rpc-websockets/node_modules/utf-8-validate/**"
+  - "node_modules/fsevents/**"
+
+# Runtime-writable data placed in resources (seeded on first launch to userData)
+extraResources:
+  - from: "src/keypairs"
+    to: "src/keypairs"
+    filter: ["**/*"]
+  - from: "src/keyInfo.json"
+    to: "src/keyInfo.json"
+  - from: "img"
+    to: "img"
+    filter: ["**/*"]
+
+mac:
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+  icon: assets/icon.png
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: assets/entitlements.mac.plist
+  entitlementsInherit: assets/entitlements.mac.plist
+  # Remove identity: null and set APPLE_ID env vars to enable notarization
+  identity: null
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: assets/icon.ico
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  installerIcon: assets/icon.ico
+  uninstallerIcon: assets/icon.ico
+  installerHeaderIcon: assets/icon.ico
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
+dmg:
+  background: assets/dmg-bg.png
+  window:
+    width: 540
+    height: 380

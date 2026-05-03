@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npx vite *)",
+      "Bash(\"/Users/marcusryan/Claude Projects/hiveguard-bundler/node_modules/electron/dist/Electron.app/Contents/MacOS/Electron\" --version)",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill *)",
+      "Bash(npm run *)",
+      "Bash(node -e \"const r = require\\('/Users/marcusryan/Claude Projects/hiveguard-bundler/node_modules/rpc-websockets'\\); console.log\\('rpc-websockets type:', typeof r\\); console.log\\('Client:', typeof r.Client\\); console.log\\('keys:', Object.keys\\(r\\).slice\\(0,10\\)\\)\")",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
