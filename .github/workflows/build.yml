@@ -25,6 +25,8 @@ jobs:
 
       - name: Build Mac (DMG)
         run: npm run app:build:mac
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Mac DMGs
         uses: actions/upload-artifact@v4
@@ -51,6 +53,8 @@ jobs:
 
       - name: Build Windows (NSIS installer)
         run: npm run app:build:win
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Windows installer
         uses: actions/upload-artifact@v4
