@@ -45,6 +45,10 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Convert PNG to proper ICO
+        run: |
+          magick assets/icon.png -define icon:auto-resize=256,128,64,48,32,16 assets/icon.ico
+
       - name: Install root dependencies
         run: npm install
 
